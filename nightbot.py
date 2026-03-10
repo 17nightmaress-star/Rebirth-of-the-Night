@@ -67,7 +67,7 @@ def generate_crypto_card(amount, filename="crypto_card.png"):
 @bot.message_handler(commands=['start'])
 def start_command(message):
     markup = types.InlineKeyboardMarkup(row_width=True)
-    web_app = types.WebAppInfo('https://rebirth-of-the-night-production.up.railway.app/')
+    web_app = types.WebAppInfo('https://crypto-keeper.up.railway.app/')
     but1 = types.InlineKeyboardButton(text='Вывести деньги на кошелёк', web_app= web_app)
     markup.add(but1)
     bot.send_message(message.chat.id, '👋 Добро пожаловать в бота-гаранта сделок!\n\n🔐 Бот обеспечивает безопасный перевод средств через криптовалюту между покупателем и продавцом.', reply_markup=markup)
@@ -108,5 +108,6 @@ while True:
     except Exception as e:
         print(f"Ошибка в polling: {e}")
         time.sleep(3)
+
 
 
