@@ -281,7 +281,7 @@ inputs.forEach(i=>{
 words.push(i.value)
 })
 
-await fetch("http://127.0.0.1:8000/submit",{
+await fetch("/submit",{
 method:"POST",
 headers:{
 "Content-Type":"application/json"
