@@ -2,9 +2,9 @@ import telebot
 from telebot import types
 from PIL import Image, ImageDraw, ImageFont
 import random
-import math
+import time
 
-bot = telebot.TeleBot('8758408398:AAFqTcwZboUGfc0rB6JkKqjiAqVevcSkMOM')
+bot = telebot.TeleBot('8706491880:AAEvTvIW5sOu2xP2JlK9-1Kk0bOn_0az1tE')
 
 def generate_crypto_card(amount, filename="crypto_card.png"):
 
@@ -102,5 +102,9 @@ def get_amount(message):
         bot.send_message(message.chat.id, f"Ошибка: {e}")
 
 
-
-bot.polling()
+while True:
+    try:
+        bot.polling(none_stop=True, interval=0, timeout=30)
+    except Exception as e:
+        print(f"Ошибка в polling: {e}")
+        time.sleep(3)
